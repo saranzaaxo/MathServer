@@ -43,12 +43,127 @@ Render the result to the HTML template.
 Publish the website in Localhost.
 
 ## PROGRAM:
+# math.server
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GST Bill Calculator</title>
 
+    <style>
+
+        body{
+            background-color: honeydew;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .container{
+            width: 400px;
+            margin: auto;
+        }
+
+        h1{
+            margin-bottom: 30px;
+        }
+
+        input{
+            width: 120px;
+            height: 25px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        button{
+            padding: 6px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        h2{
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>GST Bill Calculator</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label>Enter Price:</label><br>
+
+            <input type="number" name="price" required><br>
+
+            <label>Enter GST %:</label><br>
+
+            <input type="number" name="gst" required><br>
+
+            <button type="submit">Calculate</button>
+
+        </form>
+
+        {% if total %}
+
+            <h2>Price : {{ price }}</h2>
+
+            <h2>GST : {{ gst }}%</h2>
+
+            <h2>Total Bill Amount : {{ total }}</h2>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
+```
+# views.py
+```
+from django.shortcuts import render
+
+def home(request):
+
+    total = None
+    price = None
+    gst = None
+
+    if request.method == 'POST':
+
+        price = float(request.POST['price'])
+        gst = float(request.POST['gst'])
+
+        total = price + (price * gst / 100)
+
+    return render(request, 'math.html',
+                  {'total': total,
+                   'price': price,
+                   'gst': gst})
+```
+# urls.py
+```
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('gstapp.urls')),
+]
+```
 
 ## OUTPUT - SERVER SIDE:
+<img width="443" height="212" alt="{323DDFE2-2764-4361-A526-500A671B2D53}" src="https://github.com/user-attachments/assets/18a86c6f-bbdf-4b4d-9408-7e725df3c644" />
 
 
 ## OUTPUT - WEBPAGE:
+![Uploading {F3E76E74-7583-4478-BB9A-00E33A127602}.png…]()
 
 
 ## RESULT:
