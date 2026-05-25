@@ -163,7 +163,8 @@ urlpatterns = [
 
 
 ## OUTPUT - WEBPAGE:
-![Uploading {F3E76E74-7583-4478-BB9A-00E33A127602}.png…]()
+ <img width="447" height="247" alt="{66AF9B3D-F3E9-48AA-BF71-0BF74051529F}" src="https://github.com/user-attachments/assets/4af62560-7963-4859-bffc-9112afcb00ca" />
+   
 
 
 ## RESULT:
